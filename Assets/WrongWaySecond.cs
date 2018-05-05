@@ -28,7 +28,7 @@ public class WrongWaySecond : WrongWayFirst {
       //  GameObject thePlayer = parent.GetComponent(ScriptableObject);
       //  WrongWayFirst var = parent.GetComponent<WrongWayFirst>();
         var.x.flag2 = true;
-        Debug.Log("Usao u drugi" + "\nflag1: " + var.x.flag1 + " flag2: " + var.x.flag2 + transform.parent.parent.parent.name );
+       // Debug.Log("Usao u drugi" + "\nflag1: " + var.x.flag1 + " flag2: " + var.x.flag2 + transform.parent.parent.parent.name );
         var.x.isWrongWay();
     }
     private void OnTriggerExit(Collider other)

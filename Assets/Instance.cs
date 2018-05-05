@@ -7,6 +7,8 @@ public class Instance : MonoBehaviour {
     public Transform prefab;
     public Material lijevaTraka, desnaTraka;
     public int x = 5, y = 5, width = 1, height = 1;
+    public float additionalWidth = 2.725F;
+    private bool flagEmptySpace = false;
     //public ArrayList plane = new ArrayList();
     // Use this for initialization
     void Start()
@@ -18,17 +20,20 @@ public class Instance : MonoBehaviour {
                 Transform current;
                 if (i % 2 != 0)
                 {
-                    current = Instantiate(prefab, new Vector3(i * height, 0, j * width), Quaternion.Euler(0, 90, 0));
+                    if (j % 2 != 0 && j != 0) continue;
+                    current = Instantiate(prefab, new Vector3(i * height - 2.75F, 0, (j * width)-2.75F), Quaternion.Euler(0, 0, 0));
+                   // flagEmptySpace = true;
                 }
                 else {
-                    current = Instantiate(prefab, new Vector3(i * width, 0, j * height), Quaternion.Euler(0, 0, 0));
+                    current = Instantiate(prefab, new Vector3((i * width), 0, (j * height)), Quaternion.Euler(0, 270, 0));
+                   // current = Instantiate(prefab, new Vector3((i * width)-7.5F, -1e-15F, (j * height) - additionalWidth), Quaternion.Euler(0, 90, 0));
                 }
                 GameObject g = current.gameObject;
                 current.name = i + "" + j;
-                Transform[] rotations = current.GetComponentsInChildren<Transform>();
-                MeshRenderer[] plane = g.GetComponentsInChildren<MeshRenderer>();  
+             //   Transform[] rotations = current.GetComponentsInChildren<Transform>();
+             //   MeshRenderer[] plane = g.GetComponentsInChildren<MeshRenderer>();  
                 //plane.Add(current.GetComponent<Plane>());
-                for (int z = 0; z < plane.Length; z++)
+               /* for (int z = 0; z < plane.Length; z++)
                 {
                     if (plane[z].sharedMaterial == desnaTraka)
                     {
@@ -43,7 +48,7 @@ public class Instance : MonoBehaviour {
                     }
                     //Debug.Log("Materijal: " + plane[z].sharedMaterial);
                     //Debug.Log("Rotacija: " + current.rotation + " rotations: "+ rotations[z].rotation+ " "+ rotations[z].ToString());
-                }
+                }*/
                 
             }
         }

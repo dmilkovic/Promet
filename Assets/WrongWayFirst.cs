@@ -13,7 +13,7 @@ public class WrongWayFirst:MonoBehaviour{
     private void OnTriggerEnter(Collider other)
     {
         x.flag1 = true;
-        Debug.Log("Usao u prvi" + "\nflag1: " + x.flag1 + " flag2: "+ x.flag2);
+       // Debug.Log("Usao u prvi" + "\nflag1: " + x.flag1 + " flag2: "+ x.flag2);
         x.isWrongWay();
     }
 
