@@ -2163,7 +2163,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1747386214}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.81, y: 1.22, z: -0.55}
+  m_LocalPosition: {x: -10.6, y: 1.22, z: -46.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9478672}
@@ -2215,11 +2215,11 @@ MonoBehaviour:
   prefab: {fileID: 4733565074706298, guid: 5a9b31c5b0360094a949ef5cabf2872e, type: 2}
   lijevaTraka: {fileID: 2100000, guid: a4301df525715e842abdd4d0a8d25b37, type: 2}
   desnaTraka: {fileID: 2100000, guid: 1f3f738d4f7e62041bd669cab1f6cf3e, type: 2}
-  x: 5
-  y: 11
+  x: 10
+  y: 10
   width: 10
   height: 10
-  additionalWidth: 2.5
+  additionalWidth: 2.75
 --- !u!4 &1761146488
 Transform:
   m_ObjectHideFlags: 0

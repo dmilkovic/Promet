@@ -8,11 +8,13 @@ public class Instance : MonoBehaviour {
     public Material lijevaTraka, desnaTraka;
     public int x = 5, y = 5, width = 1, height = 1;
     public float additionalWidth = 2.725F;
-    private bool flagEmptySpace = false;
     //public ArrayList plane = new ArrayList();
     // Use this for initialization
     void Start()
     {
+        //promjenimo x i y kako bi dobili traženi broj blokova
+        x = x * 2 + 1;
+        y = y * 2 + 1;
         for (int i = 0; i < x; i++)
         {
             for (int j = 0; j < y; j++) {
@@ -20,13 +22,12 @@ public class Instance : MonoBehaviour {
                 Transform current;
                 if (i % 2 != 0)
                 {
+                    //ovo je za prazni prostor u mreži
                     if (j % 2 != 0 && j != 0) continue;
-                    current = Instantiate(prefab, new Vector3(i * height - 2.75F, 0, (j * width)-2.75F), Quaternion.Euler(0, 0, 0));
-                   // flagEmptySpace = true;
+                    current = Instantiate(prefab, new Vector3(i * height - additionalWidth, 0, (j * width)-additionalWidth), Quaternion.Euler(0, 0, 0));
                 }
                 else {
                     current = Instantiate(prefab, new Vector3((i * width), 0, (j * height)), Quaternion.Euler(0, 270, 0));
-                   // current = Instantiate(prefab, new Vector3((i * width)-7.5F, -1e-15F, (j * height) - additionalWidth), Quaternion.Euler(0, 90, 0));
                 }
                 GameObject g = current.gameObject;
                 current.name = i + "" + j;
