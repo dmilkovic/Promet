@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Instance : MonoBehaviour {
-    public Transform prefab;
+    public Transform prefabRoad, prefabIntersection;
     public Material lijevaTraka, desnaTraka;
     public int x = 5, y = 5, width = 1, height = 1;
     public float additionalWidth = 2.725F;
@@ -24,10 +24,11 @@ public class Instance : MonoBehaviour {
                 {
                     //ovo je za prazni prostor u mreži
                     if (j % 2 != 0 && j != 0) continue;
-                    current = Instantiate(prefab, new Vector3(i * height - additionalWidth, 0, (j * width)-additionalWidth), Quaternion.Euler(0, 0, 0));
+                    current = Instantiate(prefabRoad, new Vector3(i * height - additionalWidth, 0, (j * width)-additionalWidth), Quaternion.Euler(0, 0, 0));
                 }
                 else {
-                    current = Instantiate(prefab, new Vector3((i * width), 0, (j * height)), Quaternion.Euler(0, 270, 0));
+                    if(j%2 != 0) current = Instantiate(prefabRoad, new Vector3((i * width), 0, (j * height)), Quaternion.Euler(0, 270, 0));
+                    else current = Instantiate(prefabIntersection, new Vector3((i * width), 0, (j * height)), Quaternion.Euler(0, 270, 0));
                 }
                 GameObject g = current.gameObject;
                 current.name = i + "" + j;

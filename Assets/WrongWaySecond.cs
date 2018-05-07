@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WrongWaySecond : WrongWayFirst {
 
-    // Use this for initialization
+   /* // Use this for initialization
     private GameObject parent;
     private WrongWayFirst var;
     private void Start()
@@ -35,5 +35,5 @@ public class WrongWaySecond : WrongWayFirst {
     {
         var.x.flag1 = false;
     }
-
+    */
 }
