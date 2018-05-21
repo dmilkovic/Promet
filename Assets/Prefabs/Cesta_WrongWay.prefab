@@ -36,7 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4046099366663162}
   - component: {fileID: 65223796454391314}
-  - component: {fileID: 114383773063025860}
+  - component: {fileID: 114117888610162696}
   m_Layer: 0
   m_Name: ColliderSecond
   m_TagString: Untagged
@@ -53,7 +53,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4380871697051930}
   - component: {fileID: 65171838525931002}
-  - component: {fileID: 114706069411331304}
+  - component: {fileID: 114011860547220474}
   m_Layer: 0
   m_Name: ColliderSecond
   m_TagString: Untagged
@@ -72,7 +72,6 @@ GameObject:
   - component: {fileID: 33477208189864158}
   - component: {fileID: 64257439751572378}
   - component: {fileID: 23989013898047204}
-  - component: {fileID: 114203265461391826}
   m_Layer: 0
   m_Name: Plane (1)
   m_TagString: Untagged
@@ -91,7 +90,6 @@ GameObject:
   - component: {fileID: 33274696592116120}
   - component: {fileID: 64902369810243144}
   - component: {fileID: 23268798448035734}
-  - component: {fileID: 114200160793483498}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -225,7 +223,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000726224617328}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -55.2}
   m_LocalScale: {x: 0.5, y: 1, z: 1}
   m_Children:
   - {fileID: 4019298135719266}
@@ -466,45 +464,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 1, z: 1}
   m_Center: {x: 0, y: 0.5, z: -2}
---- !u!114 &114200160793483498
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1206629882085718}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7f11e9ef6c379e4f923da8b4336aeaa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  flag1: 0
-  flag2: 0
---- !u!114 &114203265461391826
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1138614360585854}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7f11e9ef6c379e4f923da8b4336aeaa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  flag1: 0
-  flag2: 0
---- !u!114 &114383773063025860
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1045792927451688}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1dff84eb3e8e7404199cd3812fc4b042, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  x: {fileID: 0}
---- !u!114 &114706069411331304
+--- !u!114 &114011860547220474
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -512,10 +472,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 1105352671484930}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1dff84eb3e8e7404199cd3812fc4b042, type: 3}
+  m_Script: {fileID: 11500000, guid: adcf60dc81c5b6b47a7fb95391f85558, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   x: {fileID: 0}
+  collider1: {fileID: 0}
+  collider2: {fileID: 0}
+--- !u!114 &114117888610162696
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1045792927451688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adcf60dc81c5b6b47a7fb95391f85558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  x: {fileID: 0}
+  collider1: {fileID: 0}
+  collider2: {fileID: 0}
 --- !u!114 &114757117226731210
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -528,6 +504,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   x: {fileID: 0}
+  collider1: {fileID: 4999439451093210}
+  collider2: {fileID: 4046099366663162}
 --- !u!114 &114907718267518936
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -540,3 +518,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   x: {fileID: 0}
+  collider1: {fileID: 0}
+  collider2: {fileID: 0}
