@@ -17,20 +17,6 @@ public class WrongWayFirst:MonoBehaviour{
             var = parent.GetComponent<WrongWayFirst>();
         }
     }
-    /*
-        private void OnTriggerEnter(Collider other)
-        {
-            Debug.Log(transform.name);
-            x.flag1 = true;
-           // Debug.Log("Usao u prvi" + "\nflag1: " + x.flag1 + " flag2: "+ x.flag2);
-            x.isWrongWay();
-        }
-
-       private void OnTriggerExit(Collider other)
-        {
-            x.flag2 = false;
-        } 
-        */
 
     private void OnTriggerEnter(Collider other)
     {
@@ -129,7 +115,7 @@ public class WrongWayFirst:MonoBehaviour{
     }
 
 }
-
+/*
 public static class Extensions
 {
     public static Transform Search(this Transform target, string name)
@@ -145,4 +131,4 @@ public static class Extensions
         }
         return null;
     }
-}
+}*/

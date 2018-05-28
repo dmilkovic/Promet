@@ -10,8 +10,8 @@ public class IntersectionWrongWay : MonoBehaviour {
     public int id;
     //public IntersectionWrongWay x;
   //  public IntersectionWrongWay var;
-    public static List <IntersectionWrongWay> colliders = new List <IntersectionWrongWay>();
-    public static int cnt = 0;
+ //   public static List <IntersectionWrongWay> colliders = new List <IntersectionWrongWay>();
+  //  public static int cnt = 0;
 
     public IntersectionWrongWay()
     {
@@ -19,18 +19,11 @@ public class IntersectionWrongWay : MonoBehaviour {
         this.flag2 = false;
         this.flag3 = false;
         this.flag4 = false;
-        this.id = cnt;
+   /*     this.id = cnt;
         cnt++;
-        colliders.Add(this);
+        colliders.Add(this);*/
     }
 
-    public void isWrongWay1()
-    {
-        if (this.flag2 && !this.flag1)
-        {
-            Debug.Log("Krivi smjer!");
-        }
-    }
 
     public void setAllFalse()
     {

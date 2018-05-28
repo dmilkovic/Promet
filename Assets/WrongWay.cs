@@ -5,6 +5,9 @@ using UnityEngine;
 public class WrongWay : MonoBehaviour {
     public bool flag1;
     public bool flag2;
+    public int Weigth;
+    public Node Parent;
+    public Node Child;
 
     public WrongWay()
     {
