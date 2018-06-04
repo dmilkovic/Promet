@@ -1973,6 +1973,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1761146488}
   - component: {fileID: 1761146487}
+  - component: {fileID: 1761146490}
+  - component: {fileID: 1761146489}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -1996,10 +1998,11 @@ MonoBehaviour:
     type: 2}
   lijevaTraka: {fileID: 2100000, guid: a4301df525715e842abdd4d0a8d25b37, type: 2}
   desnaTraka: {fileID: 2100000, guid: 1f3f738d4f7e62041bd669cab1f6cf3e, type: 2}
-  x: 2
-  y: 2
+  x: 5
+  y: 5
   width: 10
   height: 10
+  cnt: 0
   additionalWidth: 2.75
 --- !u!4 &1761146488
 Transform:
@@ -2014,6 +2017,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1761146489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1761146486}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13256d7f7614c8048afc25533af886f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Root: {fileID: 0}
+  AllNodes: []
+--- !u!114 &1761146490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1761146486}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14619f7987bdcc6458db23b5e263243c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1885030014
 Prefab:
   m_ObjectHideFlags: 0

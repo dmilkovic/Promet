@@ -6,10 +6,9 @@ using UnityEngine;
 public class Instance : MonoBehaviour {
     public Transform prefabRoad, prefabIntersection;
     public Material lijevaTraka, desnaTraka;
-    public int x = 5, y = 5, width = 1, height = 1;
+    public int x = 5, y = 5, width = 1, height = 1, cnt = 0;
     public float additionalWidth = 2.725F;
-    public Graph graph = new Graph();
-    private List <Node> nodes = new List<Node>();
+  //  private int[,] graph;
     //public ArrayList plane = new ArrayList();
     // Use this for initialization
     void Start()
@@ -17,9 +16,12 @@ public class Instance : MonoBehaviour {
         //promjenimo x i y kako bi dobili traženi broj blokova
         x = x * 2 + 1;
         y = y * 2 + 1;
+        var graph = new Graph();
+        //   graph = new int[x, y];
         for (int i = 0; i < x; i++)
         {
-            for (int j = 0; j < y; j++) {
+            for (int j = 0; j < y; j++)
+            {
                 //float size = prefab.GetComponent<Renderer>().bounds.size.x;
                 Transform current;
                 if (i % 2 != 0)
@@ -28,14 +30,18 @@ public class Instance : MonoBehaviour {
                     if (j % 2 != 0 && j != 0) continue;
                     current = Instantiate(prefabRoad, new Vector3(i * height - additionalWidth, 0, (j * width) - additionalWidth), Quaternion.Euler(0, 0, 0));
                 }
-                else {
+                else
+                {
                     if (j % 2 != 0) current = Instantiate(prefabRoad, new Vector3((i * width), 0, (j * height)), Quaternion.Euler(0, 270, 0));
-                    else current = Instantiate(prefabIntersection, new Vector3((i * width), 0, (j * height)), Quaternion.Euler(0, 270, 0));
+                    else
+                    {
+                        current = Instantiate(prefabIntersection, new Vector3((i * width), 0, (j * height)), Quaternion.Euler(0, 270, 0));
+                        graph.CreateNode(i + "" + j, cnt, (((x/2) + 1) *( y/2 + 1)) - 1);
+                        cnt++;
+                    }
                 }
                 GameObject g = current.gameObject;
                 current.name = i + "" + j;
-                var node = graph.CreateNode(i + "" + j);
-                nodes.Add(node);
 
                 //   Transform[] rotations = current.GetComponentsInChildren<Transform>();
                 //   MeshRenderer[] plane = g.GetComponentsInChildren<MeshRenderer>();  
@@ -59,15 +65,72 @@ public class Instance : MonoBehaviour {
 
             }
         }
-
-        for (int i = 0; i < nodes.Count; i++)
+        //MORAS JOS NAPRAVITI ZA PRVI I ZADNJI REDAK
+        for (int i = 0; i < graph.AllNodes.Count; i++)
         {
-            nodes[i].AddArc(nodes[0], 1);
+            int numVal = Int32.Parse(graph.AllNodes[i].Name);
+            int numDesni = i + (y / 2) + 1;
+            int numLijevi = i - (y / 2) - 1;
+            //Debug.Log(graph.AllNodes[i].Name + "  " + graph.AllNodes[i].id + " desni: " + numDesni + "  " + graph.AllNodes[i].arcsarr.Count);
+            int weigth = 2;
+            //prvi stupac(nemaju lijevog susjeda)
+            if (graph.AllNodes[i].id <= (x / 2))
+            {
+                //ako je na pocetku i nema susjeda ispod
+                if (graph.AllNodes[i].id == 0)
+                {
+                    graph.AllNodes[i].AddArc(graph.AllNodes[1], weigth);
+                    graph.AllNodes[i].AddArc(graph.AllNodes[(x / 2) + 1], weigth);
+                    continue;
+                }
+                //ako je na kraju i nema susjeda iznad
+                if (graph.AllNodes[i].id == (x / 2))
+                {
+                    graph.AllNodes[i].AddArc(graph.AllNodes[i - 1], weigth);
+                    graph.AllNodes[i].AddArc(graph.AllNodes[numDesni], weigth);
+                    continue;
+                }
+                //ako je u sredini pa ima susjeda desno, gore i dole
+                graph.AllNodes[i].AddArc(graph.AllNodes[i+1], weigth);
+                graph.AllNodes[i].AddArc(graph.AllNodes[i - 1], weigth);
+                graph.AllNodes[i].AddArc(graph.AllNodes[numDesni], weigth);
+            }
+            //zadnji stupac(nema desnog susjeda)
+            else if (graph.AllNodes[i].id > ((x / 2) * (y / 2) - 1) +x/2)
+            {
+                //ako je u sredini pa ima susjeda desno, gore i dole
+                //prvi
+                if (i == ((x / 2) * (y / 2) - 1) + x / 2 +1)
+                {
+                    graph.AllNodes[i].AddArc(graph.AllNodes[i + 1], weigth);
+                    graph.AllNodes[i].AddArc(graph.AllNodes[numLijevi], weigth);
+                    continue;
+                }
+                //zadnji
+                if (i == graph.AllNodes.Count - 1)
+                {
+                    graph.AllNodes[i].AddArc(graph.AllNodes[i - 1], weigth);
+                    graph.AllNodes[i].AddArc(graph.AllNodes[numLijevi], weigth);
+                    continue;
+                }
+                //ostali
+                graph.AllNodes[i].AddArc(graph.AllNodes[i + 1], weigth);
+                graph.AllNodes[i].AddArc(graph.AllNodes[i - 1], weigth);
+                graph.AllNodes[i].AddArc(graph.AllNodes[numLijevi], weigth);
+                //Debug.Log(graph.AllNodes[i].Name + "  " + graph.AllNodes[i].id + " lijevi   : " + numLijevi + "  " + graph.AllNodes[i].arcsarr.Count);
+            }
+            else
+            {
+                graph.AllNodes[i].AddArc(graph.AllNodes[i + 1], weigth);
+                graph.AllNodes[i].AddArc(graph.AllNodes[i - 1], weigth);
+                graph.AllNodes[i].AddArc(graph.AllNodes[numLijevi], weigth);
+                graph.AllNodes[i].AddArc(graph.AllNodes[numLijevi], weigth);
+            }
+            
         }
 
         int?[,] adj = graph.CreateAdjMatrix(); // We're going to implement that down below
-
-        PrintMatrix(ref adj, graph.AllNodes.Count); // We're going to implement that down bel
+        Graph.PrintMatrix(ref adj, graph.AllNodes.Count); // We're going to implement that down belo
     }
 
     // Update is called once per frame
@@ -75,38 +138,4 @@ public class Instance : MonoBehaviour {
 
 	}
 
-    private static void PrintMatrix(ref int?[,] matrix, int Count)
-    {
-        Debug.Log("       ");
-        for (int i = 0; i < Count; i++)
-        {
-            Debug.Log("\t "+ (char)('A' + i));
-        }
-
-       // Debug.Log(");
-
-        for (int i = 0; i < Count; i++)
-        {
-            Debug.Log("\t | [ "+ (char)('A' + i));
-
-            for (int j = 0; j < Count; j++)
-            {
-                if (i == j)
-                {
-                    Debug.Log(" &,");
-                }
-                else if (matrix[i, j] == null)
-                {
-                    Debug.Log(" .,");
-                }
-                else
-                {
-                    Debug.Log(" \t,"+ matrix[i, j]);
-                }
-
-            }
-            Debug.Log(" ]\r\n");
-        }
-        Debug.Log("\r\n");
-    }
 }

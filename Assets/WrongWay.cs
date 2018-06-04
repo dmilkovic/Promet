@@ -5,9 +5,6 @@ using UnityEngine;
 public class WrongWay : MonoBehaviour {
     public bool flag1;
     public bool flag2;
-    public int Weigth;
-    public Node Parent;
-    public Node Child;
 
     public WrongWay()
     {
@@ -20,21 +17,45 @@ public class WrongWay : MonoBehaviour {
             Debug.Log("Krivi smjer!");
         }
     }
-  /*  private void OnTriggerEnter(Collider other)
+    /*  private void OnTriggerEnter(Collider other)
+      {
+          if (other.GetComponent<Collider>().GetType() == typeof(BoxCollider))
+          {
+              Debug.Log("Usao u kocku" + other.GetComponent<Collider>().GetType());
+              // do stuff only for the box collider
+          }
+          else if (other.GetComponent<Collider>().GetType() == typeof(CapsuleCollider))
+          {
+              Debug.Log("Usao u kapsulu" + other.name);
+          }
+      }
+      private void OnTriggerExit(Collider other)
+      {
+          Debug.Log("Izasao");
+      }*/
+
+   /* public List<Node> GetNeighbours(Node node)
     {
-        if (other.GetComponent<Collider>().GetType() == typeof(BoxCollider))
+        List<Node> neighbours = new List<Node>();
+
+        for (int x = -1; x <= 1; x++)
         {
-            Debug.Log("Usao u kocku" + other.GetComponent<Collider>().GetType());
-            // do stuff only for the box collider
+            for (int y = -1; y <= 1; y++)
+            {
+                if (x == 0 && y == 0)
+                    continue;
+
+                int checkX = node.gridX + x;
+                int checkY = node.gridY + y;
+
+                if (checkX >= 0 && checkX < gridSizeX && checkY >= 0 && checkY < gridSizeY)
+                {
+                    neighbours.Add(grid[checkX, checkY]);
+                }
+            }
         }
-        else if (other.GetComponent<Collider>().GetType() == typeof(CapsuleCollider))
-        {
-            Debug.Log("Usao u kapsulu" + other.name);
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        Debug.Log("Izasao");
+
+        return neighbours;
     }*/
 
 }
