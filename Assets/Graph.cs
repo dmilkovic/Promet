@@ -83,8 +83,8 @@ public class Graph : MonoBehaviour
         for (int i = 0; i < Count; i++)
         {
             String s = " ";
-            s += (char)('A' + i);
-            Debug.Log(String.Format("{0} | [ ", (char)('A' + i)));
+            s += "ID: " +  i+": ";
+          //  Debug.Log(String.Format("{0} | [ ", (char)('A' + i)));
             for (int j = 0; j < Count; j++)
             {
                 if (i == j)
@@ -104,11 +104,11 @@ public class Graph : MonoBehaviour
                     s += " .,";
                 }
 
-                Debug.Log( "Vrijednost: " + (char)('A' + i) + matrix[i, j]);
+                //Debug.Log( "Vrijednost: " + (char)('A' + i) + matrix[i, j]);
 
             }
             Debug.Log(s);
-            Debug.Log(String.Format((" ]\r\n")));
+            //Debug.Log(String.Format((" ]\r\n")));
 
         }
         Debug.Log(String.Format("\r\n"));

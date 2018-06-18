@@ -69,6 +69,7 @@ public class Instance : MonoBehaviour {
         for (int i = 0; i < graph.AllNodes.Count; i++)
         {
             int numVal = Int32.Parse(graph.AllNodes[i].Name);
+            //indexi susjdeda s lijeve i desne strane
             int numDesni = i + (y / 2) + 1;
             int numLijevi = i - (y / 2) - 1;
             //Debug.Log(graph.AllNodes[i].Name + "  " + graph.AllNodes[i].id + " desni: " + numDesni + "  " + graph.AllNodes[i].arcsarr.Count);
@@ -120,13 +121,31 @@ public class Instance : MonoBehaviour {
                 //Debug.Log(graph.AllNodes[i].Name + "  " + graph.AllNodes[i].id + " lijevi   : " + numLijevi + "  " + graph.AllNodes[i].arcsarr.Count);
             }
             else
-            {
+            {   //prvi u tom redu
+                if ((graph.AllNodes[i].id % ((y / 2) + 1)) == 0)
+                {
+                    graph.AllNodes[i].AddArc(graph.AllNodes[i + 1], weigth);
+                    graph.AllNodes[i].AddArc(graph.AllNodes[numLijevi], weigth);
+                    graph.AllNodes[i].AddArc(graph.AllNodes[numDesni], weigth);
+                    int b = (y / 2) + 1;
+                    Debug.Log("y: " + b + " ID: " + graph.AllNodes[i].id);
+                    continue;
+                }
+                //zadnjji u tom redu
+                else if (((graph.AllNodes[i].id + 1) % ((y / 2) + 1)) == 0)
+                {
+                    graph.AllNodes[i].AddArc(graph.AllNodes[i - 1], weigth);
+                    graph.AllNodes[i].AddArc(graph.AllNodes[numLijevi], weigth);
+                    graph.AllNodes[i].AddArc(graph.AllNodes[numDesni], weigth);
+                    int b = (y / 2) + 1;
+                    Debug.Log("y: " + b + " ID: " + graph.AllNodes[i].id);
+                    continue;
+                }
                 graph.AllNodes[i].AddArc(graph.AllNodes[i + 1], weigth);
                 graph.AllNodes[i].AddArc(graph.AllNodes[i - 1], weigth);
                 graph.AllNodes[i].AddArc(graph.AllNodes[numLijevi], weigth);
-                graph.AllNodes[i].AddArc(graph.AllNodes[numLijevi], weigth);
+                graph.AllNodes[i].AddArc(graph.AllNodes[numDesni], weigth);
             }
-            
         }
 
         int?[,] adj = graph.CreateAdjMatrix(); // We're going to implement that down below
