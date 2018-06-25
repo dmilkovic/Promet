@@ -1,104 +1,150 @@
-﻿using System.Collections;
+﻿// A Java program for Dijkstra's
+// single source shortest path 
+// algorithm. The program is for
+// adjacency matrix representation
+// of the graph.
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Dijkstra : MonoBehaviour {
+class DijkstrasAlgorithm
+{
+    private static int NO_PARENT = -1;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-    class Graph
+    // Function that implements Dijkstra's
+    // single source shortest path
+    // algorithm for a graph represented 
+    // using adjacency matrix
+    // representation
+    private static void dijkstra(int[][] adjacencyMatrix,
+                                        int startVertex)
     {
-        Dictionary<char, Dictionary<char, int>> vertices = new Dictionary<char, Dictionary<char, int>>();
+        int nVertices = adjacencyMatrix[0].Length;
 
-        public void add_vertex(char name, Dictionary<char, int> edges)
+        // shortestDistances[i] will hold the
+        // shortest distance from src to i
+        int[] shortestDistances = new int[nVertices];
+
+        // added[i] will true if vertex i is
+        // included / in shortest path tree
+        // or shortest distance from src to 
+        // i is finalized
+        bool[] added = new bool[nVertices];
+
+        // Initialize all distances as 
+        // INFINITE and added[] as false
+        for (int vertexIndex = 0; vertexIndex < nVertices;
+                                            vertexIndex++)
         {
-            vertices[name] = edges;
+            shortestDistances[vertexIndex] = int.MaxValue;
+            added[vertexIndex] = false;
         }
 
-        public List<char> shortest_path(char start, char finish)
+        // Distance of source vertex from
+        // itself is always 0
+        shortestDistances[startVertex] = 0;
+
+        // Parent array to store shortest
+        // path tree
+        int[] parents = new int[nVertices];
+
+        // The starting vertex does not 
+        // have a parent
+        parents[startVertex] = NO_PARENT;
+
+        // Find shortest path for all 
+        // vertices
+        for (int i = 1; i < nVertices; i++)
         {
-            var previous = new Dictionary<char, char>();
-            var distances = new Dictionary<char, int>();
-            var nodes = new List<char>();
 
-            List<char> path = null;
-
-            foreach (var vertex in vertices)
+            // Pick the minimum distance vertex
+            // from the set of vertices not yet
+            // processed. nearestVertex is 
+            // always equal to startNode in 
+            // first iteration.
+            int nearestVertex = -1;
+            int shortestDistance = int.MaxValue;
+            for (int vertexIndex = 0;
+                    vertexIndex < nVertices;
+                    vertexIndex++)
             {
-                if (vertex.Key == start)
+                if (!added[vertexIndex] &&
+                    shortestDistances[vertexIndex] <
+                    shortestDistance)
                 {
-                    distances[vertex.Key] = 0;
-                }
-                else
-                {
-                    distances[vertex.Key] = int.MaxValue;
-                }
-
-                nodes.Add(vertex.Key);
-            }
-
-            while (nodes.Count != 0)
-            {
-                nodes.Sort((x, y) => distances[x] - distances[y]);
-
-                var smallest = nodes[0];
-                nodes.Remove(smallest);
-
-                if (smallest == finish)
-                {
-                    path = new List<char>();
-                    while (previous.ContainsKey(smallest))
-                    {
-                        path.Add(smallest);
-                        smallest = previous[smallest];
-                    }
-
-                    break;
-                }
-
-                if (distances[smallest] == int.MaxValue)
-                {
-                    break;
-                }
-
-                foreach (var neighbor in vertices[smallest])
-                {
-                    var alt = distances[smallest] + neighbor.Value;
-                    if (alt < distances[neighbor.Key])
-                    {
-                        distances[neighbor.Key] = alt;
-                        previous[neighbor.Key] = smallest;
-                    }
+                    nearestVertex = vertexIndex;
+                    shortestDistance = shortestDistances[vertexIndex];
                 }
             }
 
-            return path;
+            // Mark the picked vertex as
+            // processed
+            added[nearestVertex] = true;
+
+            // Update dist value of the
+            // adjacent vertices of the
+            // picked vertex.
+            for (int vertexIndex = 0;
+                    vertexIndex < nVertices;
+                    vertexIndex++)
+            {
+                int edgeDistance = adjacencyMatrix[nearestVertex][vertexIndex];
+
+                if (edgeDistance > 0
+                    && ((shortestDistance + edgeDistance) <
+                        shortestDistances[vertexIndex]))
+                {
+                    parents[vertexIndex] = nearestVertex;
+                    shortestDistances[vertexIndex] = shortestDistance +
+                                                    edgeDistance;
+                }
+            }
         }
+
+        printSolution(startVertex, shortestDistances, parents);
     }
 
-    class MainClass
+    // A utility function to print 
+    // the constructed distances
+    // array and shortest paths
+    private static void printSolution(int startVertex,
+                                    int[] distances,
+                                    int[] parents)
     {
-        public static void Main(string[] args)
-        {
-            Graph g = new Graph();
-            g.add_vertex('A', new Dictionary<char, int>() { { 'B', 7 }, { 'C', 8 } });
-            g.add_vertex('B', new Dictionary<char, int>() { { 'A', 7 }, { 'F', 2 } });
-            g.add_vertex('C', new Dictionary<char, int>() { { 'A', 8 }, { 'F', 6 }, { 'G', 4 } });
-            g.add_vertex('D', new Dictionary<char, int>() { { 'F', 8 } });
-            g.add_vertex('E', new Dictionary<char, int>() { { 'H', 1 } });
-            g.add_vertex('F', new Dictionary<char, int>() { { 'B', 2 }, { 'C', 6 }, { 'D', 8 }, { 'G', 9 }, { 'H', 3 } });
-            g.add_vertex('G', new Dictionary<char, int>() { { 'C', 4 }, { 'F', 9 } });
-            g.add_vertex('H', new Dictionary<char, int>() { { 'E', 1 }, { 'F', 3 } });
+        int nVertices = distances.Length;
+        Debug.Log("Vertex\t Distance\tPath");
 
-            g.shortest_path('A', 'H').ForEach(x => Debug.Log(x));
+        for (int vertexIndex = 0;
+                vertexIndex < nVertices;
+                vertexIndex++)
+        {
+            if (vertexIndex != startVertex)
+            {
+                Debug.Log("\n" + startVertex + " -> ");
+                Debug.Log(vertexIndex + " \t\t ");
+                Debug.Log(distances[vertexIndex] + "\t\t");
+                printPath(vertexIndex, parents);
+            }
         }
     }
+
+    // Function to print shortest path
+    // from source to currentVertex
+    // using parents array
+    private static void printPath(int currentVertex,
+                                int[] parents)
+    {
+
+        // Base case : Source node has
+        // been processed
+        if (currentVertex == NO_PARENT)
+        {
+            return;
+        }
+        printPath(parents[currentVertex], parents);
+        Debug.Log(currentVertex + " ");
+    }
+
 }
+
+// This code is contributed by Harikrishnan Rajan

@@ -42,6 +42,7 @@ public class Node : MonoBehaviour {
           });*/
         //ako je node već dodan u susjede
         if (arcsarr[child.id] != null) return this;
+
         //ako nije dodan susjed
         arcsarr[child.id] = new Arc
         {
