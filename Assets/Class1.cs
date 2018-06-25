@@ -10,16 +10,24 @@ using UnityEngine;
 // A utility function to find the vertex with minimum distance value, from
 // the set of vertices not yet included in shortest path tree
 public class Class1 : MonoBehaviour{
-    private static int V = 9;
+    private int V = 9;
+    private List<int>[] path;
+    //private List <int> nodePath = new List<int>();
+    private int[,] graph;
 
-    /*public Class1(int size)
+    public Class1(int size, int[,] graph)
     {
         this.V = size;
-    }*/
+        this.graph = graph;
+        dijkstra(graph, 0);
+        this.path = new List<int>[V];
+       // Start();
+    }
 
-    public void Start()
+   public void Start()
     {   /* Let us create the example graph discussed above */
-        int[,] graph = { {0, 4, 0, 0, 0, 0, 0, 8, 0},
+        V = 9;
+       int[,] graph = { {0, 4, 0, 0, 0, 0, 0, 8, 0},
                 {4, 0, 8, 0, 0, 0, 0, 11, 0},
                 {0, 8, 0, 7, 0, 4, 0, 0, 2},
                 {0, 0, 7, 0, 9, 14, 0, 0, 0},
@@ -31,18 +39,19 @@ public class Class1 : MonoBehaviour{
         dijkstra(graph, 0);
     }
 
-    int minDistance(int[] dist, bool[] sptSet)
+    private int minDistance(int[] dist, bool[] sptSet)
     {
         // Initialize min value
         int min = int.MaxValue, min_index = -1;
-
         for (int v = 0; v < V; v++)
+        {
             if (sptSet[v] == false && dist[v] <= min)
             {
                 min = dist[v];
                 min_index = v;
+                Debug.Log("MIN: " + dist[v]);
             }
-
+        }
         return min_index;
     }
 
@@ -87,14 +96,17 @@ public class Class1 : MonoBehaviour{
 
             // Update dist value of the adjacent vertices of the picked vertex.
             for (int v = 0; v < V; v++)
-
+            {
                 // Update dist[v] only if is not in sptSet, there is an edge from 
                 // u to v, and total weight of path from src to  v through u is 
                 // smaller than current value of dist[v]
-                if (!sptSet[v] && graph[u,v] != 0 &&
-                        dist[u] != int.MaxValue &&
-                        dist[u] + graph[u,v] < dist[v])
-                    dist[v] = dist[u] + graph[u,v];
+                if (!sptSet[v] && graph[u, v] != 0 && dist[u] != int.MaxValue && dist[u] + graph[u, v] < dist[v])
+                {
+                    Debug.Log("Arc: " + graph[u, v] + "  " + dist[v]);
+                    dist[v] = dist[u] + graph[u, v];
+                   // path[v].Add(v);
+                }
+            }
         }
 
         // print the constructed distance array

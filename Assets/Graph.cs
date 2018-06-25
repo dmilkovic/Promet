@@ -22,9 +22,9 @@ public class Graph : MonoBehaviour
         return n;
     }
 
-   public int?[,] CreateAdjMatrix()
+   public int[,] CreateAdjMatrix()
     {
-        int?[,] adj = new int?[AllNodes.Count, AllNodes.Count];
+        int[,] adj = new int[AllNodes.Count, AllNodes.Count];
 
         for (int i = 0; i < AllNodes.Count; i++)
         {
@@ -41,6 +41,10 @@ public class Graph : MonoBehaviour
                 if (arc != null)
                 {
                     adj[i, j] = arc.Weigth;
+                }
+                else
+                {
+                    adj[i, j] = 0;
                 }
             }
         }
@@ -67,7 +71,7 @@ public class Graph : MonoBehaviour
         return adj;
     }*/
 
-    public static void PrintMatrix(ref int?[,] matrix, int Count)
+    public static void PrintMatrix(int[,] matrix, int Count)
     {
         Debug.Log(String.Format(("       ")));
         String str = "";
@@ -83,33 +87,21 @@ public class Graph : MonoBehaviour
         for (int i = 0; i < Count; i++)
         {
             String s = " ";
-            s += "ID: " +  i+": ";
+            s += "ID: " +  i+" ";
           //  Debug.Log(String.Format("{0} | [ ", (char)('A' + i)));
             for (int j = 0; j < Count; j++)
             {
                 if (i == j)
                 {
-                    //Debug.Log(String.Format(" &,"));
                     s += " &,";
-                }
-                else if (matrix[i, j] > 0)
-                {
-                    //Debug.Log(String.Format((" .,")));
-                    s += matrix[i, j] +", ";
-                    
                 }
                 else
                 {
-                    //Debug.Log(String.Format(" {0},", matrix[i, j]));
-                    s += " .,";
+                    s += matrix[i, j] +", ";
+                    
                 }
-
-                //Debug.Log( "Vrijednost: " + (char)('A' + i) + matrix[i, j]);
-
             }
             Debug.Log(s);
-            //Debug.Log(String.Format((" ]\r\n")));
-
         }
         Debug.Log(String.Format("\r\n"));
     }
