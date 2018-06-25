@@ -12,6 +12,7 @@ using UnityEngine;
 public class Class1 : MonoBehaviour{
     private int V = 9;
     private static int NO_PARENT = -1;
+    public Material mat;
     //private List <int> nodePath = new List<int>();
     private int[,] graph;
 
@@ -20,6 +21,15 @@ public class Class1 : MonoBehaviour{
         this.V = size;
         this.graph = graph;
         dijkstra(graph, 0);
+        // Start();
+    }
+
+    public Class1(int size, int[,] graph, Material m)
+    {
+        this.V = size;
+        this.graph = graph;
+        dijkstra(graph, 0);
+        this.mat = m;
        // Start();
     }
 
@@ -39,7 +49,7 @@ public class Class1 : MonoBehaviour{
         dijkstra(graph, 0);*/
     }
 
-    private int minDistance(int[] dist, bool[] sptSet)
+  /*  private int minDistance(int[] dist, bool[] sptSet)
     {
         // Initialize min value
         int min = int.MaxValue, min_index = -1;
@@ -62,10 +72,9 @@ public class Class1 : MonoBehaviour{
         Debug.Log("Vertex   Distance from Source");
         for (int i = 0; i < V; i++)
             Debug.Log(i + "  " + dist[i]);
-    }
+    }*/
 
-    private static void dijkstra(int[,] adjacencyMatrix,
-                                       int startVertex)
+    private void dijkstra(int[,] adjacencyMatrix,  int startVertex)
     {
         int nVertices = adjacencyMatrix.GetUpperBound(1);
 
@@ -81,8 +90,7 @@ public class Class1 : MonoBehaviour{
 
         // Initialize all distances as 
         // INFINITE and added[] as false
-        for (int vertexIndex = 0; vertexIndex < nVertices;
-                                            vertexIndex++)
+        for (int vertexIndex = 0; vertexIndex < nVertices;vertexIndex++)
         {
             shortestDistances[vertexIndex] = int.MaxValue;
             added[vertexIndex] = false;
@@ -104,7 +112,6 @@ public class Class1 : MonoBehaviour{
         // vertices
         for (int i = 1; i < nVertices; i++)
         {
-
             // Pick the minimum distance vertex
             // from the set of vertices not yet
             // processed. nearestVertex is 
@@ -112,13 +119,9 @@ public class Class1 : MonoBehaviour{
             // first iteration.
             int nearestVertex = -1;
             int shortestDistance = int.MaxValue;
-            for (int vertexIndex = 0;
-                    vertexIndex < nVertices;
-                    vertexIndex++)
+            for (int vertexIndex = 0;vertexIndex < nVertices; vertexIndex++)
             {
-                if (!added[vertexIndex] &&
-                    shortestDistances[vertexIndex] <
-                    shortestDistance)
+                if (!added[vertexIndex] && shortestDistances[vertexIndex] < shortestDistance)
                 {
                     nearestVertex = vertexIndex;
                     shortestDistance = shortestDistances[vertexIndex];
@@ -132,23 +135,17 @@ public class Class1 : MonoBehaviour{
             // Update dist value of the
             // adjacent vertices of the
             // picked vertex.
-            for (int vertexIndex = 0;
-                    vertexIndex < nVertices;
-                    vertexIndex++)
+            for (int vertexIndex = 0;vertexIndex < nVertices;vertexIndex++)
             {
                 int edgeDistance = adjacencyMatrix[nearestVertex, vertexIndex];
 
-                if (edgeDistance > 0
-                    && ((shortestDistance + edgeDistance) <
-                        shortestDistances[vertexIndex]))
+                if (edgeDistance > 0&& ((shortestDistance + edgeDistance) < shortestDistances[vertexIndex]))
                 {
                     parents[vertexIndex] = nearestVertex;
-                    shortestDistances[vertexIndex] = shortestDistance +
-                                                    edgeDistance;
+                    shortestDistances[vertexIndex] = shortestDistance + edgeDistance;
                 }
             }
         }
-
         printSolution(startVertex, shortestDistances, parents);
     }
 
@@ -156,28 +153,39 @@ public class Class1 : MonoBehaviour{
     // the constructed distances
     // array and shortest paths
     private static string s;
-    private static void printSolution(int startVertex,int[] distances, int[] parents)
+    private void printSolution(int startVertex,int[] distances, int[] parents)
     {
         s = "";
         int nVertices = distances.Length;
         Debug.Log("Vertex\t Distance\tPath");
 
-        for (int vertexIndex = 0; vertexIndex < nVertices; vertexIndex++)
+        /*for (int vertexIndex = 0; vertexIndex < nVertices; vertexIndex++)
         {
             if (vertexIndex != startVertex)
             {
                 s += "\n" + startVertex + " -> " +vertexIndex + " \t\t " + distances[vertexIndex] + "\t\t";
                 printPath(vertexIndex, parents);
             }
-        }
+        }*/
+
+
+        s += "\n" + startVertex + " -> " + nVertices + " \t\t " + distances[nVertices - 1] + "\t\t";
+        printPath(nVertices - 1, parents);
         Debug.Log(s);
     }
 
     // Function to print shortest path
     // from source to currentVertex
     // using parents array
-    private static void printPath(int currentVertex, int[] parents)
+    private void printPath(int currentVertex, int[] parents)
     {
+        Renderer[] children;
+        children = Instance.nodes[currentVertex].GetComponentsInChildren<Renderer>();
+        foreach (Renderer rend in children)
+        {
+            rend.material = mat;
+        }
+        printPath(parents[currentVertex], parents);
 
         // Base case : Source node has
         // been processed
@@ -185,7 +193,8 @@ public class Class1 : MonoBehaviour{
         {
             return;
         }
-        printPath(parents[currentVertex], parents);
+       // Instance.nodes[1].GetComponent<MeshRenderer>().material = mat;
+      
         s += currentVertex + " ";
         //Debug.Log(currentVertex + " ");
     }

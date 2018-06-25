@@ -6,9 +6,11 @@ using UnityEngine;
 public class Instance : MonoBehaviour
 {
     public Transform prefabRoad, prefabIntersection;
+    public static List<Transform> nodes = new List<Transform>();
     public Material lijevaTraka, desnaTraka;
     public int x = 5, y = 5, width = 1, height = 1, cnt = 0;
     public float additionalWidth = 2.725F;
+    public Material mat;
     //  private int[,] graph;
     //public ArrayList plane = new ArrayList();
     // Use this for initialization
@@ -38,6 +40,7 @@ public class Instance : MonoBehaviour
                     {
                         current = Instantiate(prefabIntersection, new Vector3((i * width), 0, (j * height)), Quaternion.Euler(0, 270, 0));
                         graph.CreateNode(i + "" + j, cnt, (((x / 2) + 1) * (y / 2 + 1)) - 1);
+                        nodes.Add(current);
                         cnt++;
                     }
                 }
@@ -176,7 +179,7 @@ public class Instance : MonoBehaviour
 
         int[,] adj = graph.CreateAdjMatrix(); // We're going to implement that down below
         Graph.PrintMatrix(adj, graph.AllNodes.Count); // We're going to implement that down belo
-        new Class1(graph.AllNodes.Count, adj);
+        new Class1(graph.AllNodes.Count, adj, mat);
     }
 
     // Update is called once per frame
