@@ -159,7 +159,7 @@ public class Class1 : MonoBehaviour{
         int nVertices = distances.Length;
         Debug.Log("Vertex\t Distance\tPath");
 
-        /*for (int vertexIndex = 0; vertexIndex < nVertices; vertexIndex++)
+      /*  for (int vertexIndex = 0; vertexIndex < nVertices; vertexIndex++)
         {
             if (vertexIndex != startVertex)
             {
@@ -179,22 +179,22 @@ public class Class1 : MonoBehaviour{
     // using parents array
     private void printPath(int currentVertex, int[] parents)
     {
-        Renderer[] children;
-        children = Instance.nodes[currentVertex].GetComponentsInChildren<Renderer>();
-        foreach (Renderer rend in children)
-        {
-            rend.material = mat;
-        }
-        printPath(parents[currentVertex], parents);
-
+        
         // Base case : Source node has
         // been processed
         if (currentVertex == NO_PARENT)
         {
             return;
         }
-       // Instance.nodes[1].GetComponent<MeshRenderer>().material = mat;
-      
+
+        Renderer[] children;
+        children = Instance.nodes[currentVertex].GetComponentsInChildren<Renderer>();
+        foreach (Renderer rend in children)
+        {
+            rend.material = mat;
+        }
+
+        printPath(parents[currentVertex], parents);
         s += currentVertex + " ";
         //Debug.Log(currentVertex + " ");
     }

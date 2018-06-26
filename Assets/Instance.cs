@@ -80,19 +80,22 @@ public class Instance : MonoBehaviour
             //Debug.Log(graph.AllNodes[i].Name + "  " + graph.AllNodes[i].id + " desni: " + numDesni + "  " + graph.AllNodes[i].arcsarr.Count);
             int weigth = 2;
             //prvi stupac(nemaju lijevog susjeda)
-            if (graph.AllNodes[i].id <= (x / 2))
+            //if (graph.AllNodes[i].id <= (x / 2))
+            if (graph.AllNodes[i].id <= (y / 2))
             {
+                
                 //ako je na pocetku i nema susjeda ispod
                 if (graph.AllNodes[i].id == 0)
                 {
                     weigth = rnd.Next(1, x * y);
                     graph.AllNodes[i].AddArc(graph.AllNodes[1], weigth);
                     weigth = rnd.Next(1, x * y);
-                    graph.AllNodes[i].AddArc(graph.AllNodes[(x / 2) + 1], weigth);
+                    graph.AllNodes[i].AddArc(graph.AllNodes[(y / 2) + 1], weigth);
+                    Debug.Log(graph.AllNodes[i].id + "   " + numDesni + "   " + (i - 1) + "   " + (i + 1) + "   " + ((x / 2) + 1));
                     continue;
                 }
                 //ako je na kraju i nema susjeda iznad
-                if (graph.AllNodes[i].id == (x / 2))
+                if (graph.AllNodes[i].id == (y / 2))
                 {
                     weigth = rnd.Next(1, x * y);
                     graph.AllNodes[i].AddArc(graph.AllNodes[i - 1], weigth);
@@ -111,6 +114,7 @@ public class Instance : MonoBehaviour
             //zadnji stupac(nema desnog susjeda)
             else if (graph.AllNodes[i].id > ((x / 2) * (y / 2) - 1) + x / 2)
             {
+                Debug.Log(graph.AllNodes[i].id + "   " + numDesni);
                 //ako je u sredini pa ima susjeda desno, gore i dole
                 //prvi
                 if (i == ((x / 2) * (y / 2) - 1) + x / 2 + 1)
@@ -140,7 +144,8 @@ public class Instance : MonoBehaviour
                 //Debug.Log(graph.AllNodes[i].Name + "  " + graph.AllNodes[i].id + " lijevi   : " + numLijevi + "  " + graph.AllNodes[i].arcsarr.Count);
             }
             else
-            {   //prvi u tom redu
+            {
+                //prvi u tom redu
                 if ((graph.AllNodes[i].id % ((y / 2) + 1)) == 0)
                 {
                     weigth = rnd.Next(1, x * y);
@@ -166,6 +171,7 @@ public class Instance : MonoBehaviour
                     Debug.Log("y: " + b + " ID: " + graph.AllNodes[i].id);
                     continue;
                 }
+                Debug.Log(graph.AllNodes[i].Name);
                 weigth = rnd.Next(1, x * y);
                 graph.AllNodes[i].AddArc(graph.AllNodes[i + 1], weigth);
                 weigth = rnd.Next(1, x * y);

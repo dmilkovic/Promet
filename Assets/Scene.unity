@@ -2012,7 +2012,7 @@ MonoBehaviour:
     type: 2}
   lijevaTraka: {fileID: 2100000, guid: a4301df525715e842abdd4d0a8d25b37, type: 2}
   desnaTraka: {fileID: 2100000, guid: 1f3f738d4f7e62041bd669cab1f6cf3e, type: 2}
-  x: 5
+  x: 10
   y: 5
   width: 10
   height: 10
