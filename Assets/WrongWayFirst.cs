@@ -35,8 +35,9 @@ public class WrongWayFirst:MonoBehaviour{
 
         if(transform.GetComponentInParent<IntersectionWrongWay>() != null)
         {
-            intersection = transform.GetComponentInParent<IntersectionWrongWay>();
-            if (intersection.flag1)
+           // intersection = transform.GetComponentInParent<IntersectionWrongWay>();
+            IntersectionRules.isWrongWay(transform);
+           /* if (intersection.flag1)
             {
                 if (transform.name == "ColliderIntersection3")
                 {
@@ -96,7 +97,7 @@ public class WrongWayFirst:MonoBehaviour{
                     Debug.Log("Usao uz " + transform.name);
                     intersection.flag4 = true;
                 }
-            }
+            }*/
         }
     }
 
