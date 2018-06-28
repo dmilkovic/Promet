@@ -18,9 +18,13 @@ public class WrongWayFirst:MonoBehaviour{
         }
     }
 
+  /*  private void Update()
+    {
+        Debug.Log("Stop active:" + stopSignActive);
+    }*/
+
     private void OnTriggerEnter(Collider other)
     {
-       
         //Debug.Log(transform.name + " var: " + var.ToString());
         if (transform.name == "ColliderFirst")
         {
@@ -33,71 +37,25 @@ public class WrongWayFirst:MonoBehaviour{
             var.x.isWrongWay();
         }
 
+        if (transform.name == "ColliderStop")
+        {
+            StopSign.stopSignActive = true;
+            Debug.Log("Usao u stop");
+        }
+
         if(transform.GetComponentInParent<IntersectionWrongWay>() != null)
         {
-           // intersection = transform.GetComponentInParent<IntersectionWrongWay>();
-            IntersectionRules.isWrongWay(transform);
-           /* if (intersection.flag1)
+            // intersection = transform.GetComponentInParent<IntersectionWrongWay>();
+            if (StopSign.stopSignActive)
             {
-                if (transform.name == "ColliderIntersection3")
-                {
-                    Debug.Log("Krivi smjer");
-                }
+                Debug.Log("yap");
+                StopSign.CheckStop(transform);
             }
-            if (intersection.flag2)
+            else
             {
-                if (transform.name == "ColliderIntersection1")
-                {
-                    Debug.Log("Krivi smjer");
-                }
+                Debug.Log("nop");
+                IntersectionRules.isWrongWay(transform);
             }
-            if (intersection.flag3)
-            {
-                if (transform.name == "ColliderIntersection4")
-                {
-                    Debug.Log("Krivi smjer");
-                }
-            }
-            if (intersection.flag4)
-            {
-                if (transform.name == "ColliderIntersection2")
-                {
-                    Debug.Log("Krivi smjer");
-                }
-            }
-            if (!intersection.flag1 && !intersection.flag2 && !intersection.flag3 && !intersection.flag4)
-            {
-                if (transform.name == "ColliderIntersection1")
-                {
-                    Debug.Log("Usao uz " + transform.name);
-                    intersection.flag1 = true;
-
-                    //   transform.root.Search("ColliderIntersection2").GetComponent<BoxCollider>().enabled = false;
-                    //   transform.root.Search("ColliderIntersection4").GetComponent<BoxCollider>().enabled = false;
-                    // transform.root.Search("ColliderIntersection2").GetComponent<BoxCollider>().enabled = false;
-                    //  transform.root.Search("ColliderIntersection4").GetComponent<BoxCollider>().enabled = false;
-                    // BoxCollider col = GameObject.Find(transform.parent.parent.name + "/" + transform.parent.name + "/ColliderIntersection3").GetComponent<BoxCollider>();
-                    //  GameObject root = transform.root.gameObject;
-                    // BoxCollider col = transform.Find("ColliderIntersection3").GetComponent<BoxCollider>();
-                }
-                else if (transform.name == "ColliderIntersection2")
-                {
-                    Debug.Log("Usao uz " + transform.name);
-                    intersection.flag2 = true;
-                }
-                else if (transform.name == "ColliderIntersection3")
-                {
-                    Debug.Log("Usao uz " + transform.name);
-                    intersection.flag3 = true;
-                    //  transform.root.Search("ColliderIntersection1").GetComponent<BoxCollider>().enabled = false;
-                    //  transform.root.Search("ColliderIntersection4").GetComponent<BoxCollider>().enabled = false;
-                }
-                else if (transform.name == "ColliderIntersection4")
-                {
-                    Debug.Log("Usao uz " + transform.name);
-                    intersection.flag4 = true;
-                }
-            }*/
         }
     }
 
@@ -111,6 +69,7 @@ public class WrongWayFirst:MonoBehaviour{
             if (transform.name == "ColliderIntersection")
             {
                 intersection.setAllFalse();
+                StopSign.stopSignActive = false;
             }
         }
     }

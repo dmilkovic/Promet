@@ -70,7 +70,10 @@ public class Instance : MonoBehaviour
             }
         }
         //MORAS JOS NAPRAVITI ZA PRVI I ZADNJI REDAK
-        System.Random rnd = new System.Random();
+        int number = Convert.ToInt32(Math.Pow(x * y, 2));
+       //number = 1000000;
+        //int n = Convert.ToInt32(Math.Pow(x*y, 2));
+        System.Random rnd = new System.Random(Guid.NewGuid().GetHashCode());
         for (int i = 0; i < graph.AllNodes.Count; i++)
         {
             int numVal = Int32.Parse(graph.AllNodes[i].Name);
@@ -87,9 +90,10 @@ public class Instance : MonoBehaviour
                 //ako je na pocetku i nema susjeda ispod
                 if (graph.AllNodes[i].id == 0)
                 {
-                    weigth = rnd.Next(1, x * y);
+                    //weigth = rnd.Next(1,x*y );
+                    weigth = rnd.Next(1, number);
                     graph.AllNodes[i].AddArc(graph.AllNodes[1], weigth);
-                    weigth = rnd.Next(1, x * y);
+                    weigth = rnd.Next(1, number);
                     graph.AllNodes[i].AddArc(graph.AllNodes[(y / 2) + 1], weigth);
                     Debug.Log(graph.AllNodes[i].id + "   " + numDesni + "   " + (i - 1) + "   " + (i + 1) + "   " + ((x / 2) + 1));
                     continue;
@@ -97,18 +101,18 @@ public class Instance : MonoBehaviour
                 //ako je na kraju i nema susjeda iznad
                 if (graph.AllNodes[i].id == (y / 2))
                 {
-                    weigth = rnd.Next(1, x * y);
+                    weigth = rnd.Next(1, number);
                     graph.AllNodes[i].AddArc(graph.AllNodes[i - 1], weigth);
-                    weigth = rnd.Next(1, x * y);
+                    weigth = rnd.Next(1, number);
                     graph.AllNodes[i].AddArc(graph.AllNodes[numDesni], weigth);
                     continue;
                 }
                 //ako je u sredini pa ima susjeda desno, gore i dole
-                weigth = rnd.Next(1, x * y);
+                weigth = rnd.Next(1, number);
                 graph.AllNodes[i].AddArc(graph.AllNodes[i + 1], weigth);
-                weigth = rnd.Next(1, x * y);
+                weigth = rnd.Next(1, number);
                 graph.AllNodes[i].AddArc(graph.AllNodes[i - 1], weigth);
-                weigth = rnd.Next(1, x * y);
+                weigth = rnd.Next(1, number);
                 graph.AllNodes[i].AddArc(graph.AllNodes[numDesni], weigth);
             }
             //zadnji stupac(nema desnog susjeda)
@@ -119,27 +123,27 @@ public class Instance : MonoBehaviour
                 //prvi
                 if (i == ((x / 2) * (y / 2) - 1) + x / 2 + 1)
                 {
-                    weigth = rnd.Next(1, x * y);
+                    weigth = rnd.Next(1, number);
                     graph.AllNodes[i].AddArc(graph.AllNodes[i + 1], weigth);
-                    weigth = rnd.Next(1, x * y);
+                    weigth = rnd.Next(1, number);
                     graph.AllNodes[i].AddArc(graph.AllNodes[numLijevi], weigth);
                     continue;
                 }
                 //zadnji
                 if (i == graph.AllNodes.Count - 1)
                 {
-                    weigth = rnd.Next(1, x * y);
+                    weigth = rnd.Next(1, number);
                     graph.AllNodes[i].AddArc(graph.AllNodes[i - 1], weigth);
-                    weigth = rnd.Next(1, x * y);
+                    weigth = rnd.Next(1, number);
                     graph.AllNodes[i].AddArc(graph.AllNodes[numLijevi], weigth);
                     continue;
                 }
                 //ostali
-                weigth = rnd.Next(1, x * y);
+                weigth = rnd.Next(1, number);
                 graph.AllNodes[i].AddArc(graph.AllNodes[i + 1], weigth);
-                weigth = rnd.Next(1, x * y);
+                weigth = rnd.Next(1, number);
                 graph.AllNodes[i].AddArc(graph.AllNodes[i - 1], weigth);
-                weigth = rnd.Next(1, x * y);
+                weigth = rnd.Next(1, number);
                 graph.AllNodes[i].AddArc(graph.AllNodes[numLijevi], weigth);
                 //Debug.Log(graph.AllNodes[i].Name + "  " + graph.AllNodes[i].id + " lijevi   : " + numLijevi + "  " + graph.AllNodes[i].arcsarr.Count);
             }
@@ -148,11 +152,11 @@ public class Instance : MonoBehaviour
                 //prvi u tom redu
                 if ((graph.AllNodes[i].id % ((y / 2) + 1)) == 0)
                 {
-                    weigth = rnd.Next(1, x * y);
+                    weigth = rnd.Next(1, number);
                     graph.AllNodes[i].AddArc(graph.AllNodes[i + 1], weigth);
-                    weigth = rnd.Next(1, x * y);
+                    weigth = rnd.Next(1, number);
                     graph.AllNodes[i].AddArc(graph.AllNodes[numLijevi], weigth);
-                    weigth = rnd.Next(1, x * y);
+                    weigth = rnd.Next(1, number);
                     graph.AllNodes[i].AddArc(graph.AllNodes[numDesni], weigth);
                     int b = (y / 2) + 1;
                     Debug.Log("y: " + b + " ID: " + graph.AllNodes[i].id);
@@ -161,24 +165,24 @@ public class Instance : MonoBehaviour
                 //zadnji u tom redu
                 else if (((graph.AllNodes[i].id + 1) % ((y / 2) + 1)) == 0)
                 {
-                    weigth = rnd.Next(1, x * y);
+                    weigth = rnd.Next(1, number);
                     graph.AllNodes[i].AddArc(graph.AllNodes[i - 1], weigth);
-                    weigth = rnd.Next(1, x * y);
+                    weigth = rnd.Next(1, number);
                     graph.AllNodes[i].AddArc(graph.AllNodes[numLijevi], weigth);
-                    weigth = rnd.Next(1, x * y);
+                    weigth = rnd.Next(1, number);
                     graph.AllNodes[i].AddArc(graph.AllNodes[numDesni], weigth);
                     int b = (y / 2) + 1;
                     Debug.Log("y: " + b + " ID: " + graph.AllNodes[i].id);
                     continue;
                 }
                 Debug.Log(graph.AllNodes[i].Name);
-                weigth = rnd.Next(1, x * y);
+                weigth = rnd.Next(1, number);
                 graph.AllNodes[i].AddArc(graph.AllNodes[i + 1], weigth);
-                weigth = rnd.Next(1, x * y);
+                weigth = rnd.Next(1, number);
                 graph.AllNodes[i].AddArc(graph.AllNodes[i - 1], weigth);
-                weigth = rnd.Next(1, x * y);
+                weigth = rnd.Next(1, number);
                 graph.AllNodes[i].AddArc(graph.AllNodes[numLijevi], weigth);
-                weigth = rnd.Next(1, x * y);
+                weigth = rnd.Next(1, number);
                 graph.AllNodes[i].AddArc(graph.AllNodes[numDesni], weigth);
             }
         }

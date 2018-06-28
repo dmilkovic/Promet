@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23738693907054214}
   - component: {fileID: 95446203598838990}
   m_Layer: 0
-  m_Name: Stop sing
+  m_Name: Hexagon 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
