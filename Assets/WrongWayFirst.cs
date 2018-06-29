@@ -40,20 +40,27 @@ public class WrongWayFirst:MonoBehaviour{
         {
             StopSign.stopSignActive = true;
             Debug.Log("Usao u stop");
+            Instance.stop.CheckStop(transform);
             //Timer(3);
         }
 
-        if(transform.GetComponentInParent<IntersectionWrongWay>() != null)
+
+        if (transform.name == "ColliderUp")
+        {
+            UP.isActive = true;
+            Debug.Log("Usao u UP");
+        }
+
+        if (transform.GetComponentInParent<IntersectionWrongWay>() != null)
         {
             // intersection = transform.GetComponentInParent<IntersectionWrongWay>();
-            if (StopSign.stopSignActive)
+            if (UP.isActive)
             {
-                Debug.Log("yap");
-                Instance.stop.CheckStop(transform);
+                UP.check(transform);
             }
             else
             {
-                Debug.Log("nop");
+                //Debug.Log("nop");
                 IntersectionRules.isWrongWay(transform);
             }
         }
@@ -69,12 +76,16 @@ public class WrongWayFirst:MonoBehaviour{
             if (transform.name == "ColliderIntersection")
             {
                 intersection.setAllFalse();
-                StopSign.stopSignActive = false;
+                UP.isActive = false;
             }
         }
-        if (transform.name == "ColliderStop" && !StopSign.timerDone)
+        if (transform.name == "ColliderStop")
         {
-            Debug.Log("NISI STAO NA STOP");
+            if (!StopSign.timerDone)
+            {
+                Debug.Log("NISI STAO NA STOP");
+            }
+            StopSign.stopSignActive = false;
         }
     }
 

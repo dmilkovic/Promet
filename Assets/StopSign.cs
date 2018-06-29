@@ -49,10 +49,8 @@ public class StopSign : IntersectionRules
     IEnumerator LoseTime(int time)
     {
         timerDone = false;
-        Debug.Log("Time:" + timeLeft);
         yield return new WaitForSeconds(time);
         timerDone = true;
-        Debug.Log("Gotov!  ");
     }
 
 }

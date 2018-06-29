@@ -22,7 +22,6 @@ public class Instance : MonoBehaviour
         x = x * 2 + 1;
         y = y * 2 + 1;
         var graph = new Graph();
-      //  stop = new StopSign(stopTime, c1);
         stop = (new GameObject("stop")).AddComponent<StopSign>();
         stop.timeLeft = stopTime;
         //   graph = new int[x, y];
@@ -74,13 +73,15 @@ public class Instance : MonoBehaviour
 
             }
         }
-        //MORAS JOS NAPRAVITI ZA PRVI I ZADNJI REDAK
+
         int number = Convert.ToInt32(Math.Pow(x * y, 2));
-       //number = 1000000;
+        //number = 10000;
+      //  int n = number;
         //int n = Convert.ToInt32(Math.Pow(x*y, 2));
-        System.Random rnd = new System.Random(Guid.NewGuid().GetHashCode());
+        System.Random rnd = new System.Random(0);
         for (int i = 0; i < graph.AllNodes.Count; i++)
         {
+            //number = 2+(n /((i+1) * 2)); 
             int numVal = Int32.Parse(graph.AllNodes[i].Name);
             //indexi susjdeda s lijeve i desne strane
             int numDesni = i + (y / 2) + 1;
@@ -91,7 +92,6 @@ public class Instance : MonoBehaviour
             //if (graph.AllNodes[i].id <= (x / 2))
             if (graph.AllNodes[i].id <= (y / 2))
             {
-                
                 //ako je na pocetku i nema susjeda ispod
                 if (graph.AllNodes[i].id == 0)
                 {
@@ -100,7 +100,6 @@ public class Instance : MonoBehaviour
                     graph.AllNodes[i].AddArc(graph.AllNodes[1], weigth);
                     weigth = rnd.Next(1, number);
                     graph.AllNodes[i].AddArc(graph.AllNodes[(y / 2) + 1], weigth);
-                    Debug.Log(graph.AllNodes[i].id + "   " + numDesni + "   " + (i - 1) + "   " + (i + 1) + "   " + ((x / 2) + 1));
                     continue;
                 }
                 //ako je na kraju i nema susjeda iznad
@@ -178,6 +177,8 @@ public class Instance : MonoBehaviour
                     graph.AllNodes[i].AddArc(graph.AllNodes[numDesni], weigth);
                     int b = (y / 2) + 1;
                     Debug.Log("y: " + b + " ID: " + graph.AllNodes[i].id);
+                    //povećaj random
+                    //number = n;
                     continue;
                 }
                 Debug.Log(graph.AllNodes[i].Name);
