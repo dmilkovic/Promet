@@ -406,7 +406,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   x: {fileID: 0}
-  y: {fileID: 0}
 --- !u!114 &114160225971608972
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -419,7 +418,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   x: {fileID: 0}
-  y: {fileID: 0}
 --- !u!114 &114208481271008712
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -432,7 +430,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   x: {fileID: 0}
-  y: {fileID: 0}
 --- !u!114 &114396593459527288
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -483,7 +480,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   x: {fileID: 0}
-  y: {fileID: 0}
 --- !u!114 &114758341459967816
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -512,7 +508,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   x: {fileID: 0}
-  y: {fileID: 0}
 --- !u!114 &114826165813459100
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -525,7 +520,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   x: {fileID: 0}
-  y: {fileID: 0}
 --- !u!114 &114942799061960888
 MonoBehaviour:
   m_ObjectHideFlags: 1

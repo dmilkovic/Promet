@@ -8,9 +8,11 @@ public class Instance : MonoBehaviour
     public Transform prefabRoad, prefabIntersection;
     public static List<Transform> nodes = new List<Transform>();
     public Material lijevaTraka, desnaTraka;
-    public int x = 5, y = 5, width = 1, height = 1, cnt = 0;
+    public int x = 5, y = 5, width = 1, height = 1, cnt = 0, stopTime = 3;
     public float additionalWidth = 2.725F;
     public Material mat;
+    public static StopSign stop;
+    private Coroutine c1;
     //  private int[,] graph;
     //public ArrayList plane = new ArrayList();
     // Use this for initialization
@@ -20,6 +22,9 @@ public class Instance : MonoBehaviour
         x = x * 2 + 1;
         y = y * 2 + 1;
         var graph = new Graph();
+      //  stop = new StopSign(stopTime, c1);
+        stop = (new GameObject("stop")).AddComponent<StopSign>();
+        stop.timeLeft = stopTime;
         //   graph = new int[x, y];
         for (int i = 0; i < x; i++)
         {

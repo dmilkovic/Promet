@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class WrongWayFirst:MonoBehaviour{
-    // Use this for initialization
     public WrongWay x;
     private IntersectionWrongWay intersection;
     private GameObject parent;
@@ -18,10 +17,10 @@ public class WrongWayFirst:MonoBehaviour{
         }
     }
 
-  /*  private void Update()
-    {
-        Debug.Log("Stop active:" + stopSignActive);
-    }*/
+    /*  private void Update()
+      {
+          Debug.Log("Stop active:" + stopSignActive);
+      }*/
 
     private void OnTriggerEnter(Collider other)
     {
@@ -41,6 +40,7 @@ public class WrongWayFirst:MonoBehaviour{
         {
             StopSign.stopSignActive = true;
             Debug.Log("Usao u stop");
+            //Timer(3);
         }
 
         if(transform.GetComponentInParent<IntersectionWrongWay>() != null)
@@ -49,7 +49,7 @@ public class WrongWayFirst:MonoBehaviour{
             if (StopSign.stopSignActive)
             {
                 Debug.Log("yap");
-                StopSign.CheckStop(transform);
+                Instance.stop.CheckStop(transform);
             }
             else
             {
@@ -72,7 +72,12 @@ public class WrongWayFirst:MonoBehaviour{
                 StopSign.stopSignActive = false;
             }
         }
+        if (transform.name == "ColliderStop" && !StopSign.timerDone)
+        {
+            Debug.Log("NISI STAO NA STOP");
+        }
     }
+
 
 }
 /*

@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class StopSign : IntersectionRules
 {
-    public static bool stopSignActive = false;
+    public static bool stopSignActive = false, timerDone;
     public StopSign instance;
-    public static int timeLeft = 3; //Seconds Overall
+    private Coroutine c1;
+    public int timeLeft = 3; //Seconds Overall
+    public StopSign(int time)
+    {
+        timeLeft = time;
+    }
 
-    public static void CheckStop(Transform transform)
+    public void CheckStop(Transform transform)
     {
         Debug.Log("Stop");
         Time.timeScale = 1; //Just making sure that the timeScale is right
-        new Timer(timeLeft);
+        Timer(timeLeft);
         /*
          Pregledaj po svojim pravilima, zatim pozovi IntersectionIsWrongWay??
          Ali kako će program zvati kada zvati koju klasu?
@@ -24,27 +29,30 @@ public class StopSign : IntersectionRules
         ako je bio npr stop na njegov collider enter se zove 
          */
     }
-
-    public class Timer : MonoBehaviour
+    //STOP ZNAK
+    ///private Coroutine c1;
+    private void Update()
     {
-        private int timeLeft;
-        public Timer(int time)
+        if (timeLeft == 0)
         {
-            this.timeLeft = time;
-            StartCoroutine(LoseTime());
-            Debug.Log("Time:" + timeLeft);
+            StopCoroutine(c1);
         }
-
-        //Simple Coroutine
-        IEnumerator LoseTime()
-        {
-            while (true)
-            {
-                yield return new WaitForSeconds(1);
-                timeLeft--;
-            }
-        }
+        if(timerDone) StopCoroutine(c1);
     }
 
+    public void Timer(int time)
+    {
+        c1 = StartCoroutine(LoseTime(time));
+    }
+
+    //odbrojava vrijeme
+    IEnumerator LoseTime(int time)
+    {
+        timerDone = false;
+        Debug.Log("Time:" + timeLeft);
+        yield return new WaitForSeconds(time);
+        timerDone = true;
+        Debug.Log("Gotov!  ");
+    }
 
 }
