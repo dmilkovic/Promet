@@ -83,7 +83,7 @@ public class WrongWayFirst:MonoBehaviour{
             }
             else if (LeftUp.isActive)
             {
-                LeftUp.check(transform);
+                LeftUp.isWrongWay(transform);
             }
             else if (LeftSign.isActive)
             {
