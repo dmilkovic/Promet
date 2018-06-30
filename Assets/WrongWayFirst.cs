@@ -68,6 +68,12 @@ public class WrongWayFirst:MonoBehaviour{
             Debug.Log("Right");
         }
 
+        if (transform.name == "ColliderRight&Up")
+        {
+            RightUp.isActive = true;
+            Debug.Log("RightUP");
+        }
+
         if (transform.GetComponentInParent<IntersectionWrongWay>() != null)
         {
             // intersection = transform.GetComponentInParent<IntersectionWrongWay>();
@@ -77,7 +83,7 @@ public class WrongWayFirst:MonoBehaviour{
             }
             else if (LeftUp.isActive)
             {
-
+                LeftUp.check(transform);
             }
             else if (LeftSign.isActive)
             {
@@ -86,6 +92,10 @@ public class WrongWayFirst:MonoBehaviour{
             else if (RightSign.isActive)
             {
                 RightSign.checkIsRight(transform);
+            }
+            else if (RightUp.isActive)
+            {
+                RightUp.checkIsRight(transform);
             }
             else
             {
@@ -105,11 +115,15 @@ public class WrongWayFirst:MonoBehaviour{
         {
             LeftSign.checkIsRight(transform);
         }
-        //ako je desni znak aktivan primjeni njegova pravila
-       /* if (RightSign.isActive)
+        if (LeftUp.isActive)
         {
-            LeftSign.checkIsRight(transform);
-        }*/
+            LeftUp.checkIsRight(transform);
+        }
+        //ako je desni znak aktivan primjeni njegova pravila
+        /* if (RightSign.isActive)
+         {
+             LeftSign.checkIsRight(transform);
+         }*/
 
         if (transform.GetComponentInParent<IntersectionWrongWay>() != null)
         {
@@ -121,6 +135,8 @@ public class WrongWayFirst:MonoBehaviour{
                 UP.isActive = false;
                 LeftSign.isActive = false;
                 RightSign.isActive = false;
+                RightUp.isActive = false;
+                LeftUp.isActive = false;
             }
         }
 
