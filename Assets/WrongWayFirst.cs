@@ -44,11 +44,22 @@ public class WrongWayFirst:MonoBehaviour{
             //Timer(3);
         }
 
-
         if (transform.name == "ColliderUp")
         {
             UP.isActive = true;
             Debug.Log("Usao u UP");
+        }
+
+        if (transform.name == "ColliderLeft&Up")
+        {
+            LeftUp.isActive = true;
+            Debug.Log("Usao u Left&UP");
+        }
+
+        if (transform.name == "ColliderLeft")
+        {
+            LeftSign.isActive = true;
+            Debug.Log("Left");
         }
 
         if (transform.GetComponentInParent<IntersectionWrongWay>() != null)
@@ -57,6 +68,14 @@ public class WrongWayFirst:MonoBehaviour{
             if (UP.isActive)
             {
                 UP.check(transform);
+            }
+            else if (LeftUp.isActive)
+            {
+
+            }
+            else if (LeftSign.isActive)
+            {
+                LeftSign.isWrongWay(transform);
             }
             else
             {
@@ -69,16 +88,26 @@ public class WrongWayFirst:MonoBehaviour{
     private void OnTriggerExit(Collider other)
     {
         if (transform.name == "ColliderFirst") var.x.flag2 = false;
+
         if (transform.name == "ColliderSecond") var.x.flag1 = false;
+
+        if (LeftSign.isActive)
+        {
+            LeftSign.checkIsRight(transform);
+        }
+
         if (transform.GetComponentInParent<IntersectionWrongWay>() != null)
         {
             intersection = transform.GetComponentInParent<IntersectionWrongWay>();
+            
             if (transform.name == "ColliderIntersection")
             {
                 intersection.setAllFalse();
                 UP.isActive = false;
+                LeftSign.isActive = false;
             }
         }
+
         if (transform.name == "ColliderStop")
         {
             if (!StopSign.timerDone)
