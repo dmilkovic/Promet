@@ -5,7 +5,6 @@ using UnityEngine;
 public class LeftSign : IntersectionRules
 {
     public static bool isActive = false;
-    public static bool right = false;
     private static string last = "";
     private static IntersectionWrongWay intersection;
     public static void checkIsRight(Transform transform)
@@ -20,11 +19,11 @@ public class LeftSign : IntersectionRules
             {
                 Debug.Log("Krivi smjer");
             }
-            else if (transform.name == "ColliderIntersection" && intersection.flag3 && last != "ColliderIntersection3")
+            else if (transform.name == "ColliderIntersection" && intersection.flag3 && last != "ColliderIntersection2")
             {
                 Debug.Log("Krivi smjer");
             }
-            else if (transform.name == "ColliderIntersection" && intersection.flag4 && last != "ColliderIntersection2")
+            else if (transform.name == "ColliderIntersection" && intersection.flag4 && last != "ColliderIntersection1")
             {
                 Debug.Log("Krivi smjer");
             }
