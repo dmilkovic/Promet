@@ -74,6 +74,11 @@ public class WrongWayFirst:MonoBehaviour{
             Debug.Log("RightUP");
         }
 
+        if (transform.name == "ColliderWrongWay")
+        {  
+            Debug.Log("Krivi smjer!");
+        }
+
         if (transform.GetComponentInParent<IntersectionWrongWay>() != null)
         {
             // intersection = transform.GetComponentInParent<IntersectionWrongWay>();

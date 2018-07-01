@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class Instance : MonoBehaviour
 {
-    public Transform prefabRoad, prefabIntersection;
+    public Transform prefabRoad, prefabIntersection, StopSign, LeftUp, RightUp, Left, Right, Up, BothWays;
     public static List<Transform> nodes = new List<Transform>();
     public Material lijevaTraka, desnaTraka;
     public int x = 5, y = 5, width = 1, height = 1, cnt = 0, stopTime = 3;
-    public float additionalWidth = 2.725F;
+    public float additionalWidth = 2.725F, signX, signZ;
     public Material mat;
     public static StopSign stop;
     private Coroutine c1;
@@ -39,7 +39,12 @@ public class Instance : MonoBehaviour
                 }
                 else
                 {
-                    if (j % 2 != 0) current = Instantiate(prefabRoad, new Vector3((i * width), 0, (j * height)), Quaternion.Euler(0, 270, 0));
+                    if (j % 2 != 0)
+                    {
+                        Transform sign;
+                        current = Instantiate(prefabRoad, new Vector3((i * width), 0, (j * height)), Quaternion.Euler(0, 270, 0));
+                        setSign(i, j);
+                    }
                     else
                     {
                         current = Instantiate(prefabIntersection, new Vector3((i * width), 0, (j * height)), Quaternion.Euler(0, 270, 0));
@@ -71,6 +76,15 @@ public class Instance : MonoBehaviour
                      //Debug.Log("Rotacija: " + current.rotation + " rotations: "+ rotations[z].rotation+ " "+ rotations[z].ToString());
                  }*/
 
+
+            /*
+             * ako dodaješ znak OBAVEZNOG SMJERA mora ići na sve 4 strane križanja
+             * STOP smije biti s max jedne strane
+             * staviti potrebne znakove na rubna križanja
+             * NA RUBNIM KRIŽANJIMA SU UVIJEK ZNAKOVI ZA SVE SMJEROVE KOJI SU MOGUĆI
+             * OMJER KRIŽANJA I SLOBODNIH KRIŽANJA JE 2:1
+             * 
+             * */
             }
         }
 
@@ -198,6 +212,53 @@ public class Instance : MonoBehaviour
         new Class1(graph.AllNodes.Count, adj, mat);
     }
 
+
+    System.Random rnd = new System.Random(0);
+    public void setSign(int i, int j)
+    {
+        int number;
+        Transform sign;
+        number = rnd.Next(1, 5);
+        if (number > 2)
+        {
+            sign = getSign();
+            if (sign == StopSign)
+            {
+                int n = rnd.Next(1, 4);
+                if (n == 1)
+                {
+                    //ispred
+                    Instantiate(StopSign, new Vector3((i * width + signZ), 0, (j * height + signX)), Quaternion.Euler(0, 180, 0));
+                }
+                else if (n == 2)
+                {
+                    //desna
+                    Instantiate(StopSign, new Vector3((i * width + signZ + (float)0.25), 0, (j * height + 3 * signX)), Quaternion.Euler(0, 90, 0));
+                }
+                else if (n == 3)
+                { 
+                    //iznad
+                    Instantiate(StopSign, new Vector3((i * width + signZ - (float)9.8), 0, (j * height + 3 * signX)), Quaternion.Euler(0, 0, 0));
+                }else
+                { 
+                    //lijeva strana
+                    Instantiate(StopSign, new Vector3((i * width + signZ - (float)10.25), 0, (j * height + signX)), Quaternion.Euler(0, 270, 0));
+                }
+            }
+           /* //ispred
+            Instantiate(StopSign, new Vector3((i * width + signZ), 0, (j * height + signX)), Quaternion.Euler(0, 180, 0));
+            //desna
+            Instantiate(StopSign, new Vector3((i * width + signZ + (float)0.25), 0, (j * height + 3 * signX)), Quaternion.Euler(0, 90, 0));
+            //iznad
+            Instantiate(StopSign, new Vector3((i * width + signZ - (float)9.8), 0, (j * height + 3 * signX)), Quaternion.Euler(0, 0, 0));
+            //lijeva strana
+            Instantiate(StopSign, new Vector3((i * width + signZ - (float)10.25), 0, (j * height + signX)), Quaternion.Euler(0, 270, 0));*/
+        }
+    }
+    public Transform getSign()
+    {
+        return StopSign;
+    }
     // Update is called once per frame
     void Update()
     {
