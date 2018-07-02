@@ -73,14 +73,14 @@ public class Graph : MonoBehaviour
 
     public static void PrintMatrix(int[,] matrix, int Count)
     {
-        Debug.Log(String.Format(("       ")));
+        //Debug.Log(String.Format(("       ")));
         String str = "";
         for (int i = 0; i < Count; i++)
         {
             str += (char)('A' + i) + "\t";
 
         }
-        Debug.Log(str);
+        //Debug.Log(str);
         //Console.WriteLine();
         Debug.Log(" ");
 
@@ -101,7 +101,7 @@ public class Graph : MonoBehaviour
                     
                 }
             }
-            Debug.Log(s);
+            //Debug.Log(s);
         }
         Debug.Log(String.Format("\r\n"));
     }
