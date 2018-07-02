@@ -28,9 +28,6 @@ public class Instance : MonoBehaviour
 
         //threeSideIntersection(0, 0, true);
         //Instantiate(RightUpSign, new Vector3((signZ), 0, 10-(signX)), Quaternion.Euler(270, 180, 0));
-
-
-
         //else if (i == x - 1) threeSideIntersection(i, , false);
         //postavi znakove na rubove
         twoSideIntersection(x,y);
@@ -44,6 +41,7 @@ public class Instance : MonoBehaviour
                 {
                     //ovo je za prazni prostor u mreži
                     if (j % 2 != 0 && j != 0) continue;
+
                     current = Instantiate(prefabRoad, new Vector3(i * height - additionalWidth, 0, (j * width) - additionalWidth), Quaternion.Euler(0, 0, 0));
                 }
                 else
@@ -77,32 +75,27 @@ public class Instance : MonoBehaviour
                         graph.CreateNode(i + "" + j, cnt, (((x / 2) + 1) * (y / 2 + 1)) - 1);
                         nodes.Add(current);
                         cnt++;
+                        //rubni znakovi
+                        if (i > 0 && i < x - 1)
+                        {   //znakovi za prvi redak
+                            if (j == 0)
+                            {
+                                   Instantiate(RightUpSign, new Vector3(i * width + (signZ + (float)0.25), 0, signX), Quaternion.Euler(270, 90, 0));
+                                   Instantiate(BothWaysSign, new Vector3(i * width + (signZ - (float)9.8), 0, signX), Quaternion.Euler(270, 0, 0));
+                                   Instantiate(LeftUpSign, new Vector3((i * width + signZ - (float)10), 0, -signX), Quaternion.Euler(270, 270, 0));
+                            }
+                            //znakovi za zadnji redak
+                            else if (j == y - 1)
+                            {
+                                createSign(BothWaysSign, i, j - 1, 1);
+                                createSign(LeftUpSign, i, j - 1, 2);
+                                createSign(RightUpSign, i, j - 1, 4);
+                            }
+                        }
                     }
                 }
                 GameObject g = current.gameObject;
                 current.name = i + "" + j;
-
-                //   Transform[] rotations = current.GetComponentsInChildren<Transform>();
-                //   MeshRenderer[] plane = g.GetComponentsInChildren<MeshRenderer>();  
-                //plane.Add(current.GetComponent<Plane>());
-                /* for (int z = 0; z < plane.Length; z++)
-                 {
-                     if (plane[z].sharedMaterial == desnaTraka)
-                     {
-                         //Debug.Log("Green");
-                         Debug.Log("Poruka: " + plane[z].name + "Materijal: " + plane[z].sharedMaterial + rotations[z].localRotation.eulerAngles.y);
-                         if (Physics.Raycast(current.position, rotations[z].position, 10))
-                             print("There is something in front of the object!");
-                     }
-                     else if (plane[z].sharedMaterial == lijevaTraka) {
-                         //Debug.Log("Red");
-                         Debug.Log("Poruka: " + plane[z].name + "Materijal: " + plane[z].sharedMaterial + rotations[z].localRotation.eulerAngles.y);
-                     }
-                     //Debug.Log("Materijal: " + plane[z].sharedMaterial);
-                     //Debug.Log("Rotacija: " + current.rotation + " rotations: "+ rotations[z].rotation+ " "+ rotations[z].ToString());
-                 }*/
-
-
             /*
              * ako dodaješ znak OBAVEZNOG SMJERA mora ići na sve 4 strane križanja
              * STOP smije biti s max jedne strane
@@ -324,8 +317,9 @@ public class Instance : MonoBehaviour
         if (n == 1)
         {
             //StopSign i ostali prefabi imaju drukciju rotaciju
-            if(sign == StopSign) Instantiate(sign, new Vector3((i * width + signZ), 0, (j * height + signX)), Quaternion.Euler(0, 180, 0));
-            else Instantiate(sign, new Vector3((i * width + signZ), 0, (j * height + signX)), Quaternion.Euler(270, 180, 0));
+            if (sign == StopSign) Instantiate(sign, new Vector3((i * width + signZ), 0, (j * height + signX)), Quaternion.Euler(0, 180, 0));
+            else createSign(sign, i, j, 1);
+                   // Instantiate(sign, new Vector3((i * width + signZ), 0, (j * height + signX)), Quaternion.Euler(270, 180, 0));
         }
         else if (n == 2)
         {
@@ -385,7 +379,7 @@ public class Instance : MonoBehaviour
         //iznad
         Instantiate(RightSign, new Vector3(((x - 1) * width + signZ - (float)9.8), 0, signX), Quaternion.Euler(270, 0, 0));
         //lijevo
-        Instantiate(LeftSign, new Vector3(((x - 1) * width + signZ - (float)10.25), 0, -signX), Quaternion.Euler(270, 270, 0));
+        Instantiate(LeftSign, new Vector3(((x - 1) * width + signZ - (float)10), 0, -signX), Quaternion.Euler(270, 270, 0));
     }
 
     public void createSign(Transform sign, int i, int j, int side)
