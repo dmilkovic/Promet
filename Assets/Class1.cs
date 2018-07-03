@@ -13,6 +13,7 @@ public class Class1 : MonoBehaviour{
     private int V = 9;
     private static int NO_PARENT = -1;
     public Material mat;
+    public List<GameObject> shortestPath = new List<GameObject>();
     //private List <int> nodePath = new List<int>();
     private int[,] graph;
 
@@ -179,7 +180,6 @@ public class Class1 : MonoBehaviour{
     // using parents array
     private void printPath(int currentVertex, int[] parents)
     {
-        
         // Base case : Source node has
         // been processed
         if (currentVertex == NO_PARENT)
@@ -189,11 +189,15 @@ public class Class1 : MonoBehaviour{
 
         Renderer[] children;
         children = Instance.nodes[currentVertex].GetComponentsInChildren<Renderer>();
+
+        GameObject obj = Instance.nodes[currentVertex].GetComponentInChildren<Transform>().gameObject;
+        shortestPath.Insert(0, obj);
+        //Debug.Log(objekt.name);
+
         foreach (Renderer rend in children)
         {
             rend.material = mat;
         }
-
         printPath(parents[currentVertex], parents);
         s += currentVertex + " ";
         //Debug.Log(currentVertex + " ");

@@ -3019,8 +3019,8 @@ MonoBehaviour:
     type: 2}
   lijevaTraka: {fileID: 2100000, guid: a4301df525715e842abdd4d0a8d25b37, type: 2}
   desnaTraka: {fileID: 2100000, guid: 1f3f738d4f7e62041bd669cab1f6cf3e, type: 2}
-  x: 4
-  y: 4
+  x: 20
+  y: 20
   width: 10
   height: 10
   cnt: 0
@@ -3067,6 +3067,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mat: {fileID: 2100000, guid: ad514dd2c1c1c0340aa6d9a8dfb9d64a, type: 2}
+  shortestPath: []
 --- !u!114 &1761146491
 MonoBehaviour:
   m_ObjectHideFlags: 0
