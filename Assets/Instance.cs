@@ -242,7 +242,7 @@ public class Instance : MonoBehaviour
 
         foreach (GameObject g in path.shortestPath)
         {
-            Debug.Log(g.name);
+            //Debug.Log(g.name);
         }
         bool isOnPath = false;
         for (int i = 0; i < x; i++)
@@ -254,7 +254,7 @@ public class Instance : MonoBehaviour
                     //float size = prefab.GetComponent<Renderer>().bounds.size.x;
                     if (path.shortestPath.Contains(GameObject.Find(i + "" + (j + 1))))
                     {
-                        Debug.Log("Nasao: " + GameObject.Find(i + "" + j) + "   " + path.shortestPath.Count);
+                       // Debug.Log("Nasao: " + GameObject.Find(i + "" + j) + "   " + path.shortestPath.Count);
                         GameObject currentNode = GameObject.Find(i + "" + j);
                         GameObject next;
                         int broj = path.shortestPath.IndexOf(GameObject.Find(i + "" + j));
@@ -263,11 +263,11 @@ public class Instance : MonoBehaviour
                             next = path.shortestPath[broj + 1];
                             if (next.name == (i + 1) + "" + j)
                             {
-                                Debug.Log(currentNode.name + "next:" + next.name);
+                               // Debug.Log(currentNode.name + "next:" + next.name);
                             }
                             else
                             {
-                                Debug.Log(currentNode.name + "next:" + next.name);
+                               // Debug.Log(currentNode.name + "next:" + next.name);
                             }
                         }
                         isOnPath = true;
@@ -339,7 +339,7 @@ public class Instance : MonoBehaviour
         if (number > 2)
         {
             sign = getSign();
-            Debug.Log(sign);
+            //Debug.Log(sign);
             if (sign == StopSign)
             {
                 instantiateOneSign(StopSign, i, j);

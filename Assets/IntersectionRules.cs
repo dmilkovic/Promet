@@ -39,7 +39,7 @@ public class IntersectionRules : MonoBehaviour {
         {
             if (transform.name == "ColliderIntersection1")
             {
-                Debug.Log("Usao uz " + transform.name);
+                //Debug.Log("Usao uz " + transform.name);
                 intersection.flag1 = true;
 
                 //   transform.root.Search("ColliderIntersection2").GetComponent<BoxCollider>().enabled = false;
@@ -52,19 +52,19 @@ public class IntersectionRules : MonoBehaviour {
             }
             else if (transform.name == "ColliderIntersection2")
             {
-                Debug.Log("Usao uz " + transform.name);
+               // Debug.Log("Usao uz " + transform.name);
                 intersection.flag2 = true;
             }
             else if (transform.name == "ColliderIntersection3")
             {
-                Debug.Log("Usao uz " + transform.name);
+                //Debug.Log("Usao uz " + transform.name);
                 intersection.flag3 = true;
                 //  transform.root.Search("ColliderIntersection1").GetComponent<BoxCollider>().enabled = false;
                 //  transform.root.Search("ColliderIntersection4").GetComponent<BoxCollider>().enabled = false;
             }
             else if (transform.name == "ColliderIntersection4")
             {
-                Debug.Log("Usao uz " + transform.name);
+               // Debug.Log("Usao uz " + transform.name);
                 intersection.flag4 = true;
             }
         }
