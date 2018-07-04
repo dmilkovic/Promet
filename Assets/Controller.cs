@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Controller : MonoBehaviour {
     public float speed = 5f;
+    public float rotate = 10f;
 	// Use this for initialization
 	void Start () {
 		
@@ -11,6 +12,7 @@ public class Controller : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.Translate(speed * Input.GetAxis("Horizontal") * Time.deltaTime, 0f, speed * Input.GetAxis("Vertical") * Time.deltaTime);
+        transform.Translate(0f, 0f, speed * Input.GetAxis("Vertical") * Time.deltaTime);
+        transform.Rotate(0f, speed * Input.GetAxis("Horizontal") * rotate  * Time.deltaTime, 0f);
 	}
 }

@@ -137,6 +137,10 @@ public class WrongWayFirst:MonoBehaviour{
         {
             LeftRight.checkIsRight(transform);
         }
+        if (UP.isActive)
+        {
+            UP.checkIsRight(transform);
+        }
         //ako je desni znak aktivan primjeni njegova pravila
         /* if (RightSign.isActive)
          {
@@ -156,6 +160,7 @@ public class WrongWayFirst:MonoBehaviour{
                 RightUp.isActive = false;
                 LeftUp.isActive = false;
                 LeftRight.isActive = false;
+                UP.isActive = false;
             }
         }
 

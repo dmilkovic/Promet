@@ -216,7 +216,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1001 &169457656
 Prefab:
@@ -349,7 +349,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400010, guid: d54b05b01ee47a1428ea97a971c27c14, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.65
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 400010, guid: d54b05b01ee47a1428ea97a971c27c14, type: 2}
       propertyPath: m_LocalPosition.z
@@ -825,6 +825,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  rotate: 10
 --- !u!4 &1171764352 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400010, guid: d54b05b01ee47a1428ea97a971c27c14, type: 2}
@@ -841,6 +842,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.8551824, y: 2.2932043, z: 8.359139}
   m_Center: {x: -0.17390198, y: 0.7867623, z: -0.67956847}
+--- !u!54 &1171764354
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1171764350}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &1345444954
 Prefab:
   m_ObjectHideFlags: 0
@@ -1484,7 +1500,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4838299790639960, guid: 85474ab999b4db549a53ef6654f3b85b, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1822887036821492, guid: 85474ab999b4db549a53ef6654f3b85b, type: 2}
       propertyPath: m_Name
