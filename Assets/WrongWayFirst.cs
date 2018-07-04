@@ -74,6 +74,12 @@ public class WrongWayFirst:MonoBehaviour{
             Debug.Log("RightUP");
         }
 
+        if (transform.name == "ColliderBoth")
+        {
+            LeftRight.isActive = true;
+            Debug.Log("Left & Right");
+        }
+
         if (transform.name == "ColliderWrongWay")
         {  
             Debug.Log("Krivi smjer!");
@@ -101,6 +107,9 @@ public class WrongWayFirst:MonoBehaviour{
             else if (RightUp.isActive)
             {
                 RightUp.checkIsRight(transform);
+            }else if(LeftRight.isActive)
+            {
+                LeftRight.isWrongWay(transform);
             }
             else
             {
@@ -124,6 +133,10 @@ public class WrongWayFirst:MonoBehaviour{
         {
             LeftUp.checkIsRight(transform);
         }
+        if (LeftRight.isActive)
+        {
+            LeftRight.checkIsRight(transform);
+        }
         //ako je desni znak aktivan primjeni njegova pravila
         /* if (RightSign.isActive)
          {
@@ -142,6 +155,7 @@ public class WrongWayFirst:MonoBehaviour{
                 RightSign.isActive = false;
                 RightUp.isActive = false;
                 LeftUp.isActive = false;
+                LeftRight.isActive = false;
             }
         }
 
