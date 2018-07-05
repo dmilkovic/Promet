@@ -9,7 +9,7 @@ using UnityEngine;
 
 // A utility function to find the vertex with minimum distance value, from
 // the set of vertices not yet included in shortest path tree
-public class Class1 : MonoBehaviour{
+public class ShortestPath : MonoBehaviour{
     private int V = 9;
     private static int NO_PARENT = -1;
     public Material mat;
@@ -17,7 +17,7 @@ public class Class1 : MonoBehaviour{
     //private List <int> nodePath = new List<int>();
     private int[,] graph;
 
-    public Class1(int size, int[,] graph)
+    public ShortestPath(int size, int[,] graph)
     {
         this.V = size;
         this.graph = graph;
@@ -25,7 +25,7 @@ public class Class1 : MonoBehaviour{
         // Start();
     }
 
-    public Class1(int size, int[,] graph, Material m)
+    public ShortestPath(int size, int[,] graph, Material m)
     {
         this.V = size;
         this.graph = graph;
@@ -33,47 +33,6 @@ public class Class1 : MonoBehaviour{
         this.mat = m;
        // Start();
     }
-
-
-    public void Start()
-    {   /* Let us create the example graph discussed above */
-      /*  V = 9;
-       int[,] graph = { {0, 4, 0, 0, 0, 0, 0, 8, 0},
-                {4, 0, 8, 0, 0, 0, 0, 11, 0},
-                {0, 8, 0, 7, 0, 4, 0, 0, 2},
-                {0, 0, 7, 0, 9, 14, 0, 0, 0},
-                {0, 0, 0, 9, 0, 10, 0, 0, 0},
-                {0, 0, 4, 14, 10, 0, 2, 0, 0},
-                {0, 0, 0, 0, 0, 2, 0, 1, 6},
-                {8, 11, 0, 0, 0, 0, 1, 0, 7},
-                {0, 0, 2, 0, 0, 0, 6, 7, 0}};
-        dijkstra(graph, 0);*/
-    }
-
-  /*  private int minDistance(int[] dist, bool[] sptSet)
-    {
-        // Initialize min value
-        int min = int.MaxValue, min_index = -1;
-        for (int v = 0; v < V; v++)
-        {
-            if (sptSet[v] == false && dist[v] <= min)
-            {
-                min = dist[v];
-                min_index = v;
-                Debug.Log("MIN: " + dist[v]);
-            }
-        }
-        return min_index;
-    }
-
-
-    // A utility function to print the constructed distance array
-    void printSolution(int[] dist, int n)
-    {
-        Debug.Log("Vertex   Distance from Source");
-        for (int i = 0; i < V; i++)
-            Debug.Log(i + "  " + dist[i]);
-    }*/
 
     private void dijkstra(int[,] adjacencyMatrix,  int startVertex)
     {
@@ -159,17 +118,6 @@ public class Class1 : MonoBehaviour{
         s = "";
         int nVertices = distances.Length;
         Debug.Log("Vertex\t Distance\tPath");
-
-      /*  for (int vertexIndex = 0; vertexIndex < nVertices; vertexIndex++)
-        {
-            if (vertexIndex != startVertex)
-            {
-                s += "\n" + startVertex + " -> " +vertexIndex + " \t\t " + distances[vertexIndex] + "\t\t";
-                printPath(vertexIndex, parents);
-            }
-        }*/
-
-
         s += "\n" + startVertex + " -> " + nVertices + " \t\t " + distances[nVertices - 1] + "\t\t";
         printPath(nVertices - 1, parents);
         Debug.Log(s);
